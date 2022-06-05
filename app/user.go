@@ -2,6 +2,7 @@ package app
 
 import (
 	"fiber-mongo/domain"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -15,18 +16,18 @@ func NewUserSvc(db domain.UserDB) domain.UserSvc {
 	}
 }
 
-func (us userSvc) Get(id string) (*domain.User, error) {
+func (us userSvc) Get(id primitive.ObjectID) (*domain.User, error) {
 	return us.DB.Get(id)
 }
 
-func (us userSvc) List(category string) ([]*domain.User, error) {
-	return us.DB.List(category)
+func (us userSvc) List(u *domain.User) ([]*domain.User, error) {
+	return us.DB.List(u)
 }
 
 func (us userSvc) Create(user *domain.User) (*mongo.InsertOneResult, error) {
 	return us.DB.Create(user)
 }
 
-func (us userSvc) Delete(id string) error {
+func (us userSvc) Delete(id primitive.ObjectID) error {
 	return us.DB.Delete(id)
 }

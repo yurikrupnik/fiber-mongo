@@ -19,63 +19,25 @@ func NewHandler(svc domain.UserSvc) *Handler {
 }
 
 func (h *Handler) GetUser(c *fiber.Ctx) error {
-	return c.Status(200).SendString("Aris is god!!")
-	//ID := r.Context().Value("id").(string)
-	//fmt.Println("pet id : ", ID)
-	//petID, err := uuid.Parse(ID)
-	//if err != nil {
-	//	resp := Resp{
-	//		Code: http.StatusBadRequest,
-	//		Msg:  "invalid pet_id provided in url param",
-	//	}
-	//	respond(w, r, &resp)
-	//	return
-	//}
-	//if petID == uuid.Nil {
-	//	resp := Resp{
-	//		Code: http.StatusBadRequest,
-	//		Msg:  "please provide the pet id to retrieve",
-	//	}
-	//	respond(w, r, &resp)
-	//	return
-	//}
-	//pet, err := h.Svc.Get(ID)
-	//if err != nil {
-	//	fmt.Println(fmt.Errorf("error - fetching pet detail from db failed, err : %v", err))
-	//	resp := Resp{
-	//		Code: http.StatusInternalServerError,
-	//		Msg:  "fetching pet detail failed. please try again later",
-	//	}
-	//	respond(w, r, &resp)
-	//	return
-	//}
-	//resp := Resp{
-	//	Code: http.StatusOK,
-	//	Msg:  "success",
-	//	Data: pet,
-	//}
-	//respond(w, r, &resp)
+	id := c.Params("id")
+	objId, _ := primitive.ObjectIDFromHex(id)
+	data, err := h.Svc.Get(objId)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(err.Error())
+	}
+	return c.Status(200).JSON(data)
 }
 
 func (h *Handler) ListUsers(c *fiber.Ctx) error {
-	return c.SendString("kist here")
-	//query := r.Context().Value(QUERY).(*ListPetsQuery)
-	//pets, err := h.Svc.List(query.Category)
-	//if err != nil {
-	//	fmt.Println(fmt.Errorf("error - fetching pet details for given category from db failed, err : %v", err))
-	//	resp := Resp{
-	//		Code: http.StatusInternalServerError,
-	//		Msg:  "fetching all pets detail failed. please try again later",
-	//	}
-	//	respond(w, r, &resp)
-	//	return
-	//}
-	//resp := Resp{
-	//	Code: http.StatusOK,
-	//	Msg:  "success",
-	//	Data: pets,
-	//}
-	//respond(w, r, &resp)
+	u := new(domain.User)
+	if err := c.QueryParser(u); err != nil {
+		return err
+	}
+	result, err := h.Svc.List(u)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(err.Error())
+	}
+	return c.Status(fiber.StatusOK).JSON(result)
 }
 
 func (h *Handler) AddUser(c *fiber.Ctx) error {
@@ -97,11 +59,11 @@ func (h *Handler) DeleteUser(c *fiber.Ctx) error {
 
 	objId, _ := primitive.ObjectIDFromHex(id)
 	log.Println("objId", objId)
-	err := h.Svc.Delete(id)
+	err := h.Svc.Delete(objId)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(err.Error())
 	}
-	return c.SendString("deleted")
+	return c.Status(fiber.StatusOK).JSON(nil)
 	//ID := r.Context().Value("id").(string)
 	//fmt.Println("pet id : ", ID)
 	//petID, err := uuid.Parse(ID)
