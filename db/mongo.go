@@ -65,3 +65,13 @@ func (ms mongoStore) Create(user *domain.User) (*mongo.InsertOneResult, error) {
 	result, err := col.InsertOne(context.TODO(), user)
 	return result, err
 }
+
+func (ms mongoStore) Update(id primitive.ObjectID, user *domain.User) error {
+	col := ms.Client.Database("users").Collection("users")
+	//update := bson.M{"name": user.Name, "email": user.Email, "role": user.Role}
+	//fmt.Println(update)
+	_, err := col.UpdateOne(context.TODO(), bson.M{"_id": id}, bson.M{"$set": user})
+	//log.Println("UpsertedID", result.UpsertedID)
+	//_, err := col.UpdateOne(context.TODO(), user)
+	return err
+}

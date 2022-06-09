@@ -35,19 +35,37 @@ func ValidateAddUser(c *fiber.Ctx) error {
 	return c.Next()
 }
 
+func ValidateUpdateUser(c *fiber.Ctx) error {
+	var errors []*IError
+	body := new(domain.User)
+	c.BodyParser(&body)
+
+	err := Validator.StructPartial(body)
+	if err != nil {
+		for _, err := range err.(validator.ValidationErrors) {
+			var el IError
+			el.Field = err.Field()
+			el.Tag = err.Tag()
+			el.Value = err.Param()
+			log.Println(err)
+			errors = append(errors, &el)
+		}
+		return c.Status(fiber.StatusBadRequest).JSON(errors)
+	}
+	return c.Next()
+}
+
 func Routes(r fiber.Router, h *Handler) {
 	//r.Route("/users", func(r fiber.Router) {
 	r.Post("/users", ValidateAddUser, h.AddUser)
 	r.Get("/users", h.ListUsers)
 	r.Get("/users/:id", h.GetUser)
 	r.Delete("/users/:id", h.DeleteUser)
-	//r.Get("/", h.ListPets)
+	r.Put("/users/:id", ValidateUpdateUser, h.Update)
 	//r.With(ValidateQueryParam(ListPetsQuery{})).Get("/", h.ListPets)
 	//r.With(ValidateBody(domain.Pet{})).Post("/", h.AddPet)
 	//r.Route("/{id}", func(r chi.Router) {
 	//	r.Use(ValidateURLParam("id"))
-	//	r.Get("/", h.GetPet)
-	//	r.Delete("/", h.DeletePet)
 	//})
 	//})
 }

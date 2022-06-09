@@ -63,39 +63,19 @@ func (h *Handler) DeleteUser(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(err.Error())
 	}
-	return c.Status(fiber.StatusOK).JSON(nil)
-	//ID := r.Context().Value("id").(string)
-	//fmt.Println("pet id : ", ID)
-	//petID, err := uuid.Parse(ID)
-	//if err != nil {
-	//	resp := Resp{
-	//		Code: http.StatusBadRequest,
-	//		Msg:  "invalid pet_id provided in url param",
-	//	}
-	//	respond(w, r, &resp)
-	//	return
-	//}
-	//if petID == uuid.Nil {
-	//	resp := Resp{
-	//		Code: http.StatusBadRequest,
-	//		Msg:  "please provide the pet id to retrieve",
-	//	}
-	//	respond(w, r, &resp)
-	//	return
-	//}
-	//err = h.Svc.Delete(petID)
-	//if err != nil {
-	//	fmt.Println(fmt.Errorf("error - deleting pet record from db failed, err: %v", err))
-	//	resp := Resp{
-	//		Code: http.StatusInternalServerError,
-	//		Msg:  "unable to delete the pet details. please try again later",
-	//	}
-	//	respond(w, r, &resp)
-	//	return
-	//}
-	//resp := Resp{
-	//	Code: http.StatusOK,
-	//	Msg:  "success",
-	//}
-	//respond(w, r, &resp)
+	return c.Status(fiber.StatusOK).JSON(objId)
+}
+
+func (h *Handler) Update(c *fiber.Ctx) error {
+	id := c.Params("id")
+	objId, _ := primitive.ObjectIDFromHex(id)
+	var user domain.User
+	if err := c.BodyParser(&user); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(err.Error())
+	}
+	err := h.Svc.Update(objId, &user)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(err.Error())
+	}
+	return c.SendString("updated")
 }

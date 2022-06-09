@@ -18,6 +18,7 @@ type UserSvc interface {
 	List(user *User) ([]*User, error)
 	Create(u *User) (*mongo.InsertOneResult, error)
 	Delete(id primitive.ObjectID) error
+	Update(id primitive.ObjectID, u *User) error
 }
 
 type UserDB interface {
@@ -25,4 +26,5 @@ type UserDB interface {
 	List(user *User) ([]*User, error)
 	Create(u *User) (*mongo.InsertOneResult, error)
 	Delete(id primitive.ObjectID) error
+	Update(id primitive.ObjectID, u *User) error
 }

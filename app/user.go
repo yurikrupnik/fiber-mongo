@@ -31,3 +31,7 @@ func (us userSvc) Create(user *domain.User) (*mongo.InsertOneResult, error) {
 func (us userSvc) Delete(id primitive.ObjectID) error {
 	return us.DB.Delete(id)
 }
+
+func (us userSvc) Update(id primitive.ObjectID, update *domain.User) error {
+	return us.DB.Update(id, update)
+}
