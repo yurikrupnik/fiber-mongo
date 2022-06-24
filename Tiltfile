@@ -1,13 +1,20 @@
 
 
-local_resource(
-  'local-myserver',
-  cmd='GOARCH=arm64 go build',
-  serve_cmd='PORT=8080 ./fiber-mongo',
-  deps=['cmd/fiber-mongo']
-)
-# docker_build("yurikrupnik/users-api", "./")
+# load('ext://restart_process', 'docker_build_with_restart')
+docker_build("yurikrupnik/users-api", ".",
+  #  only=["./http"],
 
-k8s_yaml('k8s/base/deployment.yml')
+ #  live_update=[
+  #      sync('.', '/'),
+    #  sync("./", "./")
+   #],
+)
+
+# k8s_yaml('k8s/base/deployment.yml')
 # k8s_yaml('k8s/base/namespace.yml')
-# k8s_yaml(kustomize('k8s/base'))
+k8s_yaml(kustomize('k8s/base'))
+
+
+# ports to container port that runs as container env var - both ways
+k8s_resource("users-api", port_forwards="5001:8080")
+# k8s_resource(workload='users-api', port_forwards="5001:8080")
