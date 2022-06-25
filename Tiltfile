@@ -1,17 +1,15 @@
 
-
-# load('ext://restart_process', 'docker_build_with_restart')
-docker_build("yurikrupnik/users-api", ".",
-  #  only=["./http"],
-
- #  live_update=[
-  #      sync('.', '/'),
-    #  sync("./", "./")
-   #],
+local_resource(
+  'local-myserver',
+  cmd='GOOS=linux GOARCH=amd64 go build -o ./fiber-mongo',
+  deps=['.'],
+  ignore=["fiber-mongo"]
 )
 
-# k8s_yaml('k8s/base/deployment.yml')
-# k8s_yaml('k8s/base/namespace.yml')
+docker_build("yurikrupnik/users-api", ".",
+   only=["fiber-mongo"],
+)
+
 k8s_yaml(kustomize('k8s/base'))
 
 
