@@ -104,6 +104,7 @@ dockers:
       - "--label=org.opencontainers.image.version={{.Version}}"
       - "--platform=linux/amd64"
     use: buildx
+    goarch: amd64
 #      - linux
 #      - windows
 #      - darwin
