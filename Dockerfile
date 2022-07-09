@@ -20,10 +20,10 @@ FROM alpine:latest
 WORKDIR /
 
 #COPY --from=build /docker-gs-ping /docker-gs-ping
-COPY ./fiber-mongo /docker-gs-ping
+COPY ./fiber-mongo /fiber-mongo
 
 EXPOSE 8080
 
 #USER nonroot:nonroot
 
-ENTRYPOINT ["/docker-gs-ping"]
+ENTRYPOINT ["/fiber-mongo"]

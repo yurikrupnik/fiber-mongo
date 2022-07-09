@@ -1,48 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: users-api
+  name: fiber-mongo
   labels:
-    app: users-api
+    app: fiber-mongo
 spec:
   replicas: 1
   template:
     metadata:
-      name: users-api
+      name: fiber-mongo
       labels:
-        app: users-api
+        app: fiber-mongo
     spec:
       containers:
-        - name: users-api
-          #          image: europe-west1-docker.pkg.dev/maya-mussia/nx-go-playground/users-api:latest
-          image: yurikrupnik/users-api
+        - name: fiber-mongo
+          image: yurikrupnik/fiber-mongo
           imagePullPolicy: IfNotPresent
-          #          command: [ "node", "main.js" ]
-          #            - node
-          #            - main.js
           env:
             - name: MONGO_URI
               value: mongodb+srv://yurikrupnik:T4eXKj1RBI4VnszC@cluster0.rdmew.mongodb.net/
-            #            - name: PROJECT_ID
-            #              value: mussia14
-            #            - name: FIREBASE_DATABASE_URL
-            #              valueFrom:
-            #                secretKeyRef:
-            #                  key: firebase-database-url
-            #                  name: firebase-secret
-            #            - name: FIREBASE_PRIVATE_KEY
-            #              valueFrom:
-            #                secretKeyRef:
-            #                  key: firebase-private-key
-            #                  name: firebase-secret
-            #            - name: FIREBASE_CLIENT_EMAIL
-            #              valueFrom:
-            #                secretKeyRef:
-            #                  key: firebase-client-email
-          #                  name: firebase-secret
-
 
       restartPolicy: Always
   selector:
     matchLabels:
-      app: users-api
+      app: fiber-mongo
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo
+spec:
+  containers:
+    - name: mongo
+      image: mongo
