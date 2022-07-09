@@ -3,6 +3,15 @@ DOCKER_REGISTRY=yurikrupnik
 SERVICE=fiber-mongo
 IMAGE=${DOCKER_REGISTRY}/${SERVICE}
 
+# HELP
+# This will output the help for each task
+# thanks to https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
+.PHONY: help
+
+help: ## This help.
+	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+
+##@ Development
 up:
 	-kind create cluster --name test-env --image kindest/node:v1.21.1 --config cluster.yaml
 	-nvm install node
@@ -14,8 +23,11 @@ down:
 
 release-dry:
 	goreleaser build --snapshot --rm-dist
-release:
+release-build:
 	goreleaser build
+release-release:
+	goreleaser release
+
 build-image:
 	echo IMAGE ${IMAGE}
 	docker build . -t ${IMAGE}
