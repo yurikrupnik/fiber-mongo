@@ -67,7 +67,7 @@ release:
   # Default is empty.
   draft: true
   prerelease: auto
-  name_template: "yurikrupnik/fiber-mongo:{{ .Version }}-{{ .ProjectName }}"
+  name_template: "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
 #  disable: false
   mode: append
   gitea:
@@ -94,6 +94,7 @@ dockers:
   -
 
     image_templates:
+      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
       - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-amd64"
       - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}-amd64"
     build_flag_templates:
@@ -116,6 +117,7 @@ dockers:
     dockerfile: Dockerfile
   -
     image_templates:
+      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
       - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-arm64"
       - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}-arm64"
     use: buildx
