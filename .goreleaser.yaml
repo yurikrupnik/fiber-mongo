@@ -73,7 +73,7 @@ release:
 #  draft: true
   prerelease: auto
 #  name_template: "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
-#  disable: false
+  disable: false
   mode: append
 #  gitea:
 #    owner: yurikrupnik
