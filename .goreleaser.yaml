@@ -135,9 +135,9 @@ dockers:
 #      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
 #      - "--label=org.opencontainers.image.version={{.Version}}"
 #      - "--platform=linux/arm64"
-docker_manifests:
-  -
-    name_template: yurikrupnik/{{ .ProjectName }}:{{ .Tag }}
+#docker_manifests:
+#  -
+#    name_template: yurikrupnik/{{ .ProjectName }}:{{ .Tag }}
 #    image_templates:
 #      - yurikrupnik/{{ .ProjectName }}:{{ .Tag }}
 #      - yurikrupnik/{{ .ProjectName }}:{{ .Tag }}
