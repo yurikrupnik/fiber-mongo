@@ -18,8 +18,11 @@ func NewMongoStore() (domain.UserDB, error) {
 	//uri := os.Getenv("mongo_uri")
 	uri := "mongodb+srv://yurikrupnik:T4eXKj1RBI4VnszC@cluster0.rdmew.mongodb.net/"
 	//uri := "mongodb://db/profiles"
+	//uri := "http://host.docker.internal:27017"
+	//uri := "mongodb://localhost/db" // compose local gow run main.go
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
 	if err != nil {
+		log.Println("error connecting mongo")
 		return nil, err
 	}
 	return mongoStore{Client: client}, nil

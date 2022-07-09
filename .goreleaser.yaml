@@ -1,0 +1,110 @@
+# This is an example .goreleaser.yml file with some sensible defaults.
+# Make sure to check the documentation at https://goreleaser.com
+before:
+  hooks:
+    # You may remove this if you don't use go modules.
+    - go mod tidy
+    # you may remove this if you don't need go generate
+    - go generate ./...
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    binary: fiber-mongo
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+
+universal_binaries:
+  - replace: true
+
+dockers:
+#  latest: true
+  - image_templates:
+    - 'yurikrupnik/fiber-mongo:{{ .Tag }}'
+#  - tag_templates:
+#      - '{{ .Tag }}'
+#dockers:
+#  binaries:
+#    - app
+#  image_templates:
+#   - 'yurikrupnik/commands:{{ .Tag }}'
+#   - 'yurikrupnik/commands:v{{ .Major }}.{{ .Minor }}'
+#   - 'yurikrupnik/commands:latest'
+#    dockerfile: "../../.."
+#    binaries:
+#    - "commands"
+release:
+  # Default is empty.
+  prerelease: auto
+  mode: append
+  gitea:
+    owner: user
+    name: repo
+  ids:
+    - foo
+    - bar
+
+  header: |
+    ## Some title ({{ .Date }})
+    
+    Welcome to this new release!
+    
+    # Footer template for the release body.
+    # Defaults to empty.
+#  footer: |
+#  ## Thanks!
+#
+#  Those were the changes on {{ .Tag }}!
+
+
+# TODO Check
+#builds:
+#  - env:
+#      - CGO_ENABLED=0
+#    binary: app
+#    goos:
+#      - linux
+#    goarch:
+#      - amd64
+#      - arm64
+#dockers:
+#  - image_templates:
+#      - "foo/bar:{{ .Version }}-amd64"
+#    use: docker
+#    #    use: buildx
+#    #    use: podamn # todo check how to make it work
+#    dockerfile: Dockerfile
+#    build_flag_templates:
+#      - "--platform=linux/amd64"
+#  - image_templates:
+#      - "foo/bar:{{ .Version }}-arm64v8"
+#    use: buildx
+#    #    goarch: arm64
+#    dockerfile: Dockerfile
+#    build_flag_templates:
+#      - "--platform=linux/arm64/v8"
+#docker_manifests:
+#  - name_template: foo/bar:{{ .Version }}
+#    image_templates:
+#      - foo/bar:{{ .Version }}-amd64
+#      - foo/bar:{{ .Version }}-arm64v8
