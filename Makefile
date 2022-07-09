@@ -33,7 +33,7 @@ release-dry: ## Create dev release - able to run while changing code per snapsho
 release-build:
 	IMAGE=${IMAGE} goreleaser build
 release-release:
-	GITHUB_TOKEN=$GITHUB_TOKEN IMAGE=$IMAGE goreleaser release
+	GITHUB_TOKEN=$GITHUB_TOKEN IMAGE=$IMAGE goreleaser release --rm-dist
 
 build-image:
 	echo IMAGE ${IMAGE}
