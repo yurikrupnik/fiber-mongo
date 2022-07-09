@@ -26,8 +26,10 @@ down: ## Kind down cluster with 3 worker nodes
 	tilt down
 	kind delete cluster
 
-release-dry:
-	IMAGE=${IMAGE} GITHUB_TOKEN= goreleaser build --snapshot --rm-dist
+.PHONY: release-dry
+release-dry: ## Create dev release - able to run while changing code per snapshot.
+	IMAGE=${IMAGE} GITHUB_TOKEN= goreleaser release --snapshot --rm-dist
+.PHONY: release-dry
 release-build:
 	IMAGE=${IMAGE} goreleaser build
 release-release:
