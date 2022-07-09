@@ -28,3 +28,4 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
       - run: go version
+      - run: make release-dry
