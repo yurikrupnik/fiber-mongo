@@ -29,6 +29,11 @@ builds:
 #      - 7
     binary: fiber-mongo
 archives:
+  -
+    name_template: aris
+    builds:
+      - default
+    meta: true
   - replacements:
       darwin: Darwin
       linux: Linux
@@ -130,9 +135,9 @@ dockers:
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
       - "--platform=linux/arm64"
-#docker_manifests:
-#  -
-#    name_template: yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}
-#    image_templates:
-#      - yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}
-#      - yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}
+docker_manifests:
+  -
+    name_template: yurikrupnik/{{ .ProjectName }}:{{ .Tag }}
+    image_templates:
+      - yurikrupnik/{{ .ProjectName }}:{{ .Tag }}
+      - yurikrupnik/{{ .ProjectName }}:{{ .Tag }}
