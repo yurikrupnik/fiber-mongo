@@ -2,8 +2,8 @@
 # Make sure to check the documentation at https://goreleaser.com
 env:
 #  - FOO={{ .Env.FOOBAR }}
-  - IMAGE_COPY={{ .Env.IMAGE }}
-  - IMAGE={{ .Env.IMAGE }}
+#  - IMAGE_COPY={{ .Env.IMAGE }}
+  - IMAGE=yurikrupnik/fiber-mongo
 project_name: fiber-mongo
 before:
   hooks:
