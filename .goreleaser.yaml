@@ -75,9 +75,9 @@ release:
   name_template: "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
 #  disable: false
   mode: append
-  gitea:
-    owner: yurikrupnik
-    name: fiber-mongo
+#  gitea:
+#    owner: yurikrupnik
+#    name: fiber-mongo
 #  ids:
 #    - foo
 #    - bar
