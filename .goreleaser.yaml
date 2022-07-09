@@ -82,18 +82,18 @@ universal_binaries:
 #    - foo
 #    - bar
 
-  header: |
-    ## Some title ({{ .Date }})
-    
-    Welcome to this new release!
-    
-    # Footer template for the release body.
-    # Defaults to empty.
-  footer: |
-    ## Thanks!
-  
-    Those were the changes on {{ .Tag }}!
-
+#  header: |
+#    ## Some title ({{ .Date }})
+#
+#    Welcome to this new release!
+#
+#    # Footer template for the release body.
+#    # Defaults to empty.
+#  footer: |
+#    ## Thanks!
+#
+#    Those were the changes on {{ .Tag }}!
+#
 
 dockers:
   -
