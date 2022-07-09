@@ -94,7 +94,7 @@ dockers:
   -
 
     image_templates:
-      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
+      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-amd64"
 #      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}"
     build_flag_templates:
       - "--pull"
@@ -102,7 +102,7 @@ dockers:
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
-#      - "--platform=linux/amd64"
+      - "--platform=linux/amd64"
     use: buildx
 #      - linux
 #      - windows
@@ -113,20 +113,20 @@ dockers:
 #      - arm
 #      - arm64
     dockerfile: Dockerfile
-#  -
-#    image_templates:
-#      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-arm64"
+  -
+    image_templates:
+      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-arm64"
 #      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}-arm64"
-#    use: buildx
-#    goarch: arm64
-#    dockerfile: Dockerfile
-#    build_flag_templates:
-#      - "--pull"
-#      - "--label=org.opencontainers.image.created={{.Date}}"
-#      - "--label=org.opencontainers.image.title={{.ProjectName}}"
-#      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-#      - "--label=org.opencontainers.image.version={{.Version}}"
-#      - "--platform=linux/arm64"
+    use: buildx
+    goarch: arm64
+    dockerfile: Dockerfile
+    build_flag_templates:
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--platform=linux/arm64"
 #docker_manifests:
 #  -
 #    name_template: yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}
