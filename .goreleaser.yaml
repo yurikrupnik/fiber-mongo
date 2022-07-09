@@ -13,6 +13,9 @@ builds:
       - linux
       - windows
       - darwin
+    goarch:
+      - amd64
+      - arm64
     binary: fiber-mongo
 archives:
   - replacements:
@@ -38,28 +41,24 @@ universal_binaries:
   - replace: true
 
 dockers:
-#  latest: true
+#  - latest: true
   - image_templates:
     - 'yurikrupnik/fiber-mongo:{{ .Tag }}'
+  - build_flag_templates:
+    - "--platform=linux/amd64"
 #  - tag_templates:
 #      - '{{ .Tag }}'
-#dockers:
-#  binaries:
-#    - app
-#  image_templates:
-#   - 'yurikrupnik/commands:{{ .Tag }}'
-#   - 'yurikrupnik/commands:v{{ .Major }}.{{ .Minor }}'
-#   - 'yurikrupnik/commands:latest'
-#    dockerfile: "../../.."
-#    binaries:
-#    - "commands"
+
 release:
   # Default is empty.
+  draft: true
   prerelease: auto
+  name_template: "v{{ .Version }}"
+  disable: false
   mode: append
   gitea:
-    owner: user
-    name: repo
+    owner: yurikrupnik
+    name: fiber-mongo
   ids:
     - foo
     - bar
@@ -71,10 +70,10 @@ release:
     
     # Footer template for the release body.
     # Defaults to empty.
-#  footer: |
-#  ## Thanks!
-#
-#  Those were the changes on {{ .Tag }}!
+  footer: |
+    ## Thanks!
+  
+    Those were the changes on {{ .Tag }}!
 
 
 # TODO Check
