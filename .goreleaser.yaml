@@ -54,7 +54,7 @@ release:
   prerelease: auto
   name_template: "yurikrupnik/fiber-mongo:{{ .Version }}-{{ .ProjectName }}"
 #  disable: false
-#  mode: append
+  mode: append
   gitea:
     owner: yurikrupnik
     name: fiber-mongo
