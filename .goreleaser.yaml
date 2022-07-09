@@ -70,7 +70,7 @@ universal_binaries:
 
 release:
   # Default is empty.
-  draft: true
+#  draft: true
   prerelease: auto
   name_template: "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
 #  disable: false
