@@ -17,7 +17,7 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
-      - windows
+#      - windows
       - darwin
     goarch:
 #      - 386
@@ -32,8 +32,8 @@ archives:
   - replacements:
       darwin: Darwin
       linux: Linux
-      windows: Windows
-      386: i386
+#      windows: Windows
+#      386: i386
       amd64: x86_64
 checksum:
   name_template: 'checksums.txt'
@@ -95,8 +95,8 @@ dockers:
 
     image_templates:
       - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
-      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-amd64"
-      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}-amd64"
+#      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-amd64"
+#      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}-amd64"
     build_flag_templates:
       - "--pull"
       - "--label=org.opencontainers.image.created={{.Date}}"
@@ -118,8 +118,8 @@ dockers:
   -
     image_templates:
       - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
-      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-arm64"
-      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}-arm64"
+#      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-arm64"
+#      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}-arm64"
     use: buildx
     goarch: arm64
     dockerfile: Dockerfile
