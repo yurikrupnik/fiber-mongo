@@ -34,7 +34,7 @@ jobs:
         with:
           # either 'goreleaser' (default) or 'goreleaser-pro'
           distribution: goreleaser
-          version: latest
+#          version: latest
           args: build --rm-dist --snapshot
 #          args: release --rm-dist
         env:
