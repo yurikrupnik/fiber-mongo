@@ -72,7 +72,7 @@ release:
   # Default is empty.
 #  draft: true
   prerelease: auto
-  name_template: "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
+#  name_template: "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
 #  disable: false
   mode: append
 #  gitea:
