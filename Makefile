@@ -32,7 +32,7 @@ release-dry:
 release-build:
 	goreleaser build
 release-release:
-	goreleaser release
+	GITHUB_TOKEN=$GITHUB_TOKEN IMAGE=$IMAGE goreleaser release
 
 build-image:
 	echo IMAGE ${IMAGE}
