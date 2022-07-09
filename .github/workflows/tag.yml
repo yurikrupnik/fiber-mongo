@@ -3,7 +3,7 @@
 
 #SetNodeAndPnpm: &set-node
 
-name: Node.js CI
+name: Tags CI
 
 on:
   push:
