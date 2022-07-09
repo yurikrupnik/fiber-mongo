@@ -103,7 +103,7 @@ dockers:
 #      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-amd64"
 #      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}-amd64"
     build_flag_templates:
-      - "--pull"
+      - "--push"
       - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
