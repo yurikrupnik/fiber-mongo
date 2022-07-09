@@ -12,9 +12,10 @@ down:
 	-tilt down
 	kind delete cluster --name test-env
 
-release:
+release-dry:
 	goreleaser build --snapshot --rm-dist
-
+release:
+	goreleaser build
 build-image:
 	echo IMAGE ${IMAGE}
 	docker build . -t ${IMAGE}
