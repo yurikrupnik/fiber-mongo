@@ -3,10 +3,8 @@
 project_name: fiber-mongo
 before:
   hooks:
-    # You may remove this if you don't use go modules.
     - go mod tidy
-    # you may remove this if you don't need go generate
-    - go generate ./...
+#    - go generate ./...
 builds:
   - env:
       - CGO_ENABLED=0
@@ -41,12 +39,12 @@ changelog:
 universal_binaries:
   - replace: true
 
-#dockers:
-##  - latest: true
-#  - image_templates:
-#    - 'yurikrupnik/fiber-mongo:{{ .Tag }}'
-#  - build_flag_templates:
-#    - "--platform=linux/amd64"
+dockers:
+#  - latest: true
+  - image_templates:
+    - 'yurikrupnik/fiber-mongo:{{ .Tag }}'
+  - build_flag_templates:
+    - "--platform=linux/amd64"
 #  - tag_templates:
 #      - '{{ .Tag }}'
 
@@ -54,7 +52,7 @@ release:
   # Default is empty.
   draft: true
   prerelease: auto
-  name_template: "v{{ .Version }}"
+  name_template: "yurikrupnik/fiber-mongo:{{ .Version }}-{{ .ProjectName }}"
 #  disable: false
 #  mode: append
   gitea:
@@ -78,15 +76,16 @@ release:
 
 
 
-dockers:
-  - image_templates:
-      - "yurikrupnik/fiber-mongo:{{ .Version }}-{{ .ProjectName }}"
-      - "yurikrupnik/fiber-mongo:{{ .Tag }}-amd64"
-      - "yurikrupnik/fiber-mongo:{{ .ProjectName }}-amd64"
-#    use: docker
-    use: buildx
-    #    use: podamn # todo check how to make it work
-    dockerfile: Dockerfile
+#dockers:
+#  - image_templates:
+#      - "yurikrupnik/fiber-mongo:{{ .Version }}-{{ .ProjectName }}"
+#      - "yurikrupnik/fiber-mongo:{{ .Tag }}-amd64"
+#      - "yurikrupnik/fiber-mongo:{{ .ProjectName }}-amd64"
+#      - "yurikrupnik/fiber-mongo:latest"
+##    use: docker
+#    use: buildx
+#    #    use: podamn # todo check how to make it work
+#    dockerfile: Dockerfile
 #    build_flag_templates:
 #      - "--platform=linux/amd64"
 #      - "--platform=linux/arm64/v8"
@@ -97,8 +96,8 @@ dockers:
 #    dockerfile: Dockerfile
 #    build_flag_templates:
 #      - "--platform=linux/arm64/v8"
-docker_manifests:
-  - name_template: yurikrupnik/fiber-mongo:{{ .Version }}
-    image_templates:
-      - yurikrupnik/fiber-mongo:{{ .Version }}-amd64
-      - yurikrupnik/fiber-mongo:{{ .Version }}-arm64v8
+#docker_manifests:
+#  - name_template: yurikrupnik/fiber-mongo:{{ .Version }}
+#    image_templates:
+#      - yurikrupnik/fiber-mongo:{{ .Version }}-amd64
+#      - yurikrupnik/fiber-mongo:{{ .Version }}-arm64v8
