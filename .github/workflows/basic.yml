@@ -25,26 +25,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Get Yarn cache directory
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)" # v1 yarn cache dir
-      - name: Use Yarn cache
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
-      - run: yarn install
-      - run: yarn -v
       - uses: actions/setup-go@v3
         with:
           go-version: '1.18.2'
       - run: go version
-      - run: yarn nx run-many --parallel --all --target=test
-      - run: yarn nx run-many --parallel --all --target=build
-      - run: yarn nx run-many --parallel --all --target=lint
-      - run: yarn nx run-many --parallel --all --target=e2e
