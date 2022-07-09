@@ -68,13 +68,13 @@ universal_binaries:
 #  - tag_templates:
 #      - '{{ .Tag }}'
 
-release:
-  # Default is empty.
-#  draft: true
-  prerelease: auto
-#  name_template: "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
-  disable: false
-  mode: append
+#release:
+#  # Default is empty.
+##  draft: true
+#  prerelease: auto
+##  name_template: "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
+#  disable: false
+#  mode: append
 #  gitea:
 #    owner: yurikrupnik
 #    name: fiber-mongo
