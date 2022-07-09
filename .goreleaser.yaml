@@ -94,7 +94,8 @@ dockers:
   -
 
     image_templates:
-      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}"
+      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
+#      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}"
     build_flag_templates:
       - "--pull"
       - "--label=org.opencontainers.image.created={{.Date}}"
@@ -114,6 +115,7 @@ dockers:
     dockerfile: Dockerfile
 #  -
 #    image_templates:
+#      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-arm64"
 #      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}-arm64"
 #    use: buildx
 #    goarch: arm64
