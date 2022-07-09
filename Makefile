@@ -1,4 +1,4 @@
-GITHUB_TOKEN=""
+GITHUB_TOKEN="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"
 DOCKER_REGISTRY=yurikrupnik
 SERVICE=fiber-mongo
 IMAGE=${DOCKER_REGISTRY}/${SERVICE}
@@ -28,7 +28,7 @@ down: ## Kind down cluster with 3 worker nodes
 	kind delete cluster --name test-env --config cluster.yaml
 
 release-dry:
-	goreleaser build --snapshot --rm-dist
+	GITHUB_TOKEN= goreleaser build --snapshot --rm-dist
 release-build:
 	goreleaser build
 release-release:

@@ -1,5 +1,6 @@
 # This is an example .goreleaser.yml file with some sensible defaults.
 # Make sure to check the documentation at https://goreleaser.com
+project_name: fiber-mongo
 before:
   hooks:
     # You may remove this if you don't use go modules.
@@ -40,12 +41,12 @@ changelog:
 universal_binaries:
   - replace: true
 
-dockers:
-#  - latest: true
-  - image_templates:
-    - 'yurikrupnik/fiber-mongo:{{ .Tag }}'
-  - build_flag_templates:
-    - "--platform=linux/amd64"
+#dockers:
+##  - latest: true
+#  - image_templates:
+#    - 'yurikrupnik/fiber-mongo:{{ .Tag }}'
+#  - build_flag_templates:
+#    - "--platform=linux/amd64"
 #  - tag_templates:
 #      - '{{ .Tag }}'
 
@@ -54,14 +55,14 @@ release:
   draft: true
   prerelease: auto
   name_template: "v{{ .Version }}"
-  disable: false
-  mode: append
+#  disable: false
+#  mode: append
   gitea:
     owner: yurikrupnik
     name: fiber-mongo
-  ids:
-    - foo
-    - bar
+#  ids:
+#    - foo
+#    - bar
 
   header: |
     ## Some title ({{ .Date }})
@@ -76,34 +77,28 @@ release:
     Those were the changes on {{ .Tag }}!
 
 
-# TODO Check
-#builds:
-#  - env:
-#      - CGO_ENABLED=0
-#    binary: app
-#    goos:
-#      - linux
-#    goarch:
-#      - amd64
-#      - arm64
-#dockers:
-#  - image_templates:
-#      - "foo/bar:{{ .Version }}-amd64"
+
+dockers:
+  - image_templates:
+      - "yurikrupnik/fiber-mongo:{{ .Version }}-{{ .ProjectName }}"
+      - "yurikrupnik/fiber-mongo:{{ .Tag }}-amd64"
+      - "yurikrupnik/fiber-mongo:{{ .ProjectName }}-amd64"
 #    use: docker
-#    #    use: buildx
-#    #    use: podamn # todo check how to make it work
-#    dockerfile: Dockerfile
+    use: buildx
+    #    use: podamn # todo check how to make it work
+    dockerfile: Dockerfile
 #    build_flag_templates:
 #      - "--platform=linux/amd64"
+#      - "--platform=linux/arm64/v8"
 #  - image_templates:
-#      - "foo/bar:{{ .Version }}-arm64v8"
+#      - "yurikrupnik/fiber-mongo:{{ .Version }}-arm64v8"
 #    use: buildx
 #    #    goarch: arm64
 #    dockerfile: Dockerfile
 #    build_flag_templates:
 #      - "--platform=linux/arm64/v8"
-#docker_manifests:
-#  - name_template: foo/bar:{{ .Version }}
-#    image_templates:
-#      - foo/bar:{{ .Version }}-amd64
-#      - foo/bar:{{ .Version }}-arm64v8
+docker_manifests:
+  - name_template: yurikrupnik/fiber-mongo:{{ .Version }}
+    image_templates:
+      - yurikrupnik/fiber-mongo:{{ .Version }}-amd64
+      - yurikrupnik/fiber-mongo:{{ .Version }}-arm64v8
