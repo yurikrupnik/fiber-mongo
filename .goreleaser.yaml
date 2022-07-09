@@ -138,6 +138,6 @@ dockers:
 docker_manifests:
   -
     name_template: yurikrupnik/{{ .ProjectName }}:{{ .Tag }}
-    image_templates:
-      - yurikrupnik/{{ .ProjectName }}:{{ .Tag }}
-      - yurikrupnik/{{ .ProjectName }}:{{ .Tag }}
+#    image_templates:
+#      - yurikrupnik/{{ .ProjectName }}:{{ .Tag }}
+#      - yurikrupnik/{{ .ProjectName }}:{{ .Tag }}
