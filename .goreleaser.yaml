@@ -20,8 +20,13 @@ builds:
       - windows
       - darwin
     goarch:
+      - 386
       - amd64
+      - arm
       - arm64
+    goarm:
+      - 6
+      - 7
     binary: fiber-mongo
 archives:
   - replacements:
@@ -85,31 +90,22 @@ release:
     Those were the changes on {{ .Tag }}!
 
 
-
 dockers:
   - image_templates:
-#      - "yurikrupnik/{{ .ProjectName }}:{{ .Version }}-{{ .ProjectName }}"
-#      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-amd64"
-      - "yurikrupnik/{{ .ProjectName }}:{{ .Version }}-amd64"
-#      - "yurikrupnik/{{ .ProjectName }}:latest"
-#    use: docker
+      - "yurikrupnik/bar:{{ .Version }}-amd64"
     use: buildx
-#    use: podamn # todo check how to make it work
     dockerfile: Dockerfile
     build_flag_templates:
       - "--platform=linux/amd64"
-#      - "--platform=linux/arm64/v8"
   - image_templates:
-#      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-arm64v8"
-      - "yurikrupnik/{{ .ProjectName }}:{{ .Version }}-arm64v8"
+      - "yurikrupnik/bar:{{ .Version }}-arm64v8"
     use: buildx
     goarch: arm64
     dockerfile: Dockerfile
     build_flag_templates:
       - "--platform=linux/arm64/v8"
 docker_manifests:
-  - name_template: yurikrupnik/{{ .ProjectName }}:{{ .Version }}
-    use: docker
+  - name_template: yurikrupnik/bar:{{ .Version }}
     image_templates:
-      - yurikrupnik/{{ .ProjectName }}:{{ .Version }}-amd64
-      - yurikrupnik/{{ .ProjectName }}:{{ .Version }}-arm64v8
+      - yurikrupnik/bar:{{ .Version }}-amd64
+      - yurikrupnik/bar:{{ .Version }}-arm64v8

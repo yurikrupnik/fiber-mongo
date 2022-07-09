@@ -1,4 +1,4 @@
-GITHUB_TOKEN="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"
+GITHUB_TOKEN=""
 DOCKER_REGISTRY=yurikrupnik
 SERVICE=fiber-mongo
 IMAGE=${DOCKER_REGISTRY}/${SERVICE}
@@ -19,18 +19,17 @@ release-dev: ## goreleaser build snapshot
 
 ##@ Cluster
 up: ## Kind up cluster with 3 worker nodes
-	-kind create cluster --name test-env --image kindest/node:v1.21.1 --config cluster.yaml
-	-nvm install node
-	#tilt up
-	make tilt
+	-ctlptl create registry ctlptl-registry
+	-ctlptl create cluster kind --registry=ctlptl-registry
+	-tilt up
 down: ## Kind down cluster with 3 worker nodes
-	-tilt down
-	kind delete cluster --name test-env --config cluster.yaml
+	tilt down
+	kind delete cluster
 
 release-dry:
-	GITHUB_TOKEN= goreleaser build --snapshot --rm-dist
+	IMAGE=${IMAGE} GITHUB_TOKEN= goreleaser build --snapshot --rm-dist
 release-build:
-	goreleaser build
+	IMAGE=${IMAGE} goreleaser build
 release-release:
 	GITHUB_TOKEN=$GITHUB_TOKEN IMAGE=$IMAGE goreleaser release
 
