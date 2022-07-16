@@ -19,7 +19,7 @@ RUN go build -o /fiber-mongo
 FROM alpine:latest
 WORKDIR /
 
-COPY --from=build /fiber-mongo /fiber-mongo
+COPY --from=build /app/fiber-mongo /fiber-mongo
 #COPY ./fiber-mongo /fiber-mongo
 
 EXPOSE 8080
