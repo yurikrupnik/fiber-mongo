@@ -1,14 +1,14 @@
-#FROM golang:1.18-buster AS build
-#
-#WORKDIR /app
-#
-#COPY go.mod ./
-#COPY go.sum ./
-#RUN go mod download
-#
-#COPY . .
-#
-#RUN go build -o /docker-gs-ping
+FROM golang:1.18-buster AS build
+
+WORKDIR /app
+
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
+
+COPY . .
+
+RUN go build -o /fiber-mongo
 
 ##
 ## Deploy
@@ -19,8 +19,8 @@
 FROM alpine:latest
 WORKDIR /
 
-#COPY --from=build /docker-gs-ping /docker-gs-ping
-COPY ./fiber-mongo /fiber-mongo
+COPY --from=build /fiber-mongo /fiber-mongo
+#COPY ./fiber-mongo /fiber-mongo
 
 EXPOSE 8080
 

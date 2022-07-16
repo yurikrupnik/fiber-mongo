@@ -57,7 +57,7 @@ func ValidateUpdateUser(c *fiber.Ctx) error {
 
 //type Op func(v *Validate) (s interface{}, fields string) error
 
-func Dam(partial bool) fiber.Handler {
+func CreateAndUpdateValidation(partial bool) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		var errors []*IError
 		body := new(domain.User)
@@ -99,7 +99,7 @@ func Routes(r fiber.Router, h *Handler) {
 	r.Get("/users", h.ListUsers)
 	r.Get("/users/:id", h.GetUser)
 	r.Delete("/users/:id", h.DeleteUser)
-	r.Put("/users/:id", Dam(true), ValidateUpdateUser, h.Update)
+	r.Put("/users/:id", CreateAndUpdateValidation(true), ValidateUpdateUser, h.Update)
 	//r.With(ValidateQueryParam(ListPetsQuery{})).Get("/", h.ListPets)
 	//r.With(ValidateBody(domain.Pet{})).Post("/", h.AddPet)
 	//r.Route("/{id}", func(r chi.Router) {
