@@ -25,12 +25,3 @@ spec:
     matchLabels:
       app: fiber-mongo
 
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: mongo
-spec:
-  containers:
-    - name: mongo
-      image: mongo

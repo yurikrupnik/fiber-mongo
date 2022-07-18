@@ -16,7 +16,7 @@ type mongoStore struct {
 
 func NewMongoStore() (domain.UserDB, error) {
 	//uri := os.Getenv("mongo_uri")
-	uri := "mongodb+srv://yurikrupnik:T4eXKj1RBI4VnszC@cluster0.rdmew.mongodb.net/"
+	uri := "mongodb://mongo:2vfLviWFRXCA6ixz31Be@containers-us-west-84.railway.app:6216"
 	//uri := "mongodb://db/profiles"
 	//uri := "http://host.docker.internal:27017"
 	//uri := "mongodb://localhost/db" // compose local gow run main.go
