@@ -20,7 +20,7 @@ jobs:
 #    runs-on: self-hosted
     strategy:
       matrix:
-        go-version: [ 1.18.x ]
+        go-version: [ 1.17.x ]
 
     steps:
       - uses: actions/checkout@v3
@@ -29,6 +29,12 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - run: go version
 #      - run: make release-dry
+      - name: Login to DockerHub Registry
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      #      - id: 'auth'
+      #        uses: 'google-github-actions/auth@v0'
+      #        with:
+      #          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v3
         with:
