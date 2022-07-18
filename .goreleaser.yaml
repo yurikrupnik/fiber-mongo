@@ -68,46 +68,45 @@ universal_binaries:
 #  - tag_templates:
 #      - '{{ .Tag }}'
 
-#release:
+release:
 #  # Default is empty.
-##  draft: true
-#  prerelease: auto
-##  name_template: "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
-#  disable: false
-#  mode: append
-#  gitea:
-#    owner: yurikrupnik
-#    name: fiber-mongo
+  draft: true
+  prerelease: auto
+  name_template: "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
+  disable: false
+  mode: append
+  gitea:
+    owner: yurikrupnik
+    name: fiber-mongo
 #  ids:
 #    - foo
 #    - bar
 
-#  header: |
-#    ## Some title ({{ .Date }})
-#
-#    Welcome to this new release!
-#
-#    # Footer template for the release body.
-#    # Defaults to empty.
-#  footer: |
-#    ## Thanks!
-#
-#    Those were the changes on {{ .Tag }}!
-#
+  header: |
+    ## Some title ({{ .Date }})
+
+    Welcome to this new release!
+
+    # Footer template for the release body.
+    # Defaults to empty.
+  footer: |
+    ## Thanks!
+
+    Those were the changes on {{ .Tag }}!
+
 
 dockers:
   -
-
     image_templates:
       - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
 #      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-amd64"
 #      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}-amd64"
-    build_flag_templates:
-      - "--push"
-      - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title={{.ProjectName}}"
-      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-      - "--label=org.opencontainers.image.version={{.Version}}"
+#    build_flag_templates:
+#      - "--push"
+#      - "--label=org.opencontainers.image.created={{.Date}}"
+#      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+#      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+#      - "--label=org.opencontainers.image.version={{.Version}}"
 #      - "--platform=linux/amd64"
     use: buildx
 #    goarch: amd64
