@@ -57,19 +57,7 @@ changelog:
 universal_binaries:
   - replace: true
 
-#dockers:
-##  - latest: true
-#  - image_templates:
-##    - "yurikrupnik/{{ .ProjectName }}:{{ .Version }}"
-#    - 'yurikrupnik/{{ .ProjectName }}:{{ .Tag }}'
-#    - 'yurikrupnik/{{ .ProjectName }}:latest'
-#  - build_flag_templates:
-#    - "--platform=linux/amd64"
-#  - tag_templates:
-#      - '{{ .Tag }}'
-
 release:
-#  # Default is empty.
   draft: true
   prerelease: auto
   name_template: "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
@@ -84,7 +72,8 @@ release:
 
   header: |
     ## Some title ({{ .Date }})
-
+    docker hub: yurikrupnik/fiber-mongo:{{ .Tag }}
+    Docker Hub: [image](yurikrupnik/fiber-mongo:{{ .Tag }})
     Welcome to this new release!
 
     # Footer template for the release body.
