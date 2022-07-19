@@ -8,6 +8,7 @@ project_name: fiber-mongo
 before:
   hooks:
     - go mod tidy
+    - go test -v ./...
 #    - echo $IMAGE_COPY
 #    - echo ${IMAGE_COPY}
 #    - echo $IMAGE
@@ -28,6 +29,13 @@ builds:
 #      - 6
 #      - 7
     binary: fiber-mongo
+#    hooks:
+#      pre:
+#        - ls -a
+#        - second-script.sh
+#      post:
+#        - ls -a
+#        - codesign -project="{{ .ProjectName }}" "{{ .Path }}"
 #archives:
 #  -
 #    name_template: aris
