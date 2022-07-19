@@ -46,10 +46,14 @@ jobs:
           # either 'goreleaser' (default) or 'goreleaser-pro'
           distribution: goreleaser
 #          version: latest
-          args: release --rm-dist --snapshot
+          args: build --rm-dist --snapshot
 #          args: release --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Git tag and push
+        run: |
+          git tag -a v0.2.5 -m "third release"
+          git push --tags
 #      - uses: rymndhng/release-on-push-action@v0.25.0
 #        with:
 #          bump_version_scheme: patch

@@ -1,0 +1,50 @@
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: 'command to run'
+        required: true
+        default: 'build'
+      message:
+        description: "Tag's message"
+        required: true
+        default: 'Default release'
+      tags:
+        description: 'Test scenario tags'
+        default: 'latest'
+        required: false
+        options:
+          - prerelease
+          - patch
+          - major
+          - minor
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    #    runs-on: self-hosted
+    #    strategy:
+    #      matrix:
+    #        node-version: [ 16.x ]
+    #        go-version: [ 1.18.x ]
+    # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout [main]
+        with:
+          fetch-depth: 0
+      - run: yarn install
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.17
+      #          go-version: ${{ matrix.go-version }
+#      - run: go version
+#      - run: GOOS=linux GOARCH=amd64 yarn build
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Git tag and push
+        run: |
+          git tag -a v${{ github.event.inputs.tag }} -m ${{ github.event.inputs.message }}
+          git push --tags
