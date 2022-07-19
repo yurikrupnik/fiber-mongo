@@ -52,12 +52,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Git tag and push
         run: |
-          git tag -a v0.2.5 -m "third release"
+          git tag -a v0.2.6 -m "third release"
           git push --tags
 #      - uses: rymndhng/release-on-push-action@v0.25.0
 #        with:
 #          bump_version_scheme: patch
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
