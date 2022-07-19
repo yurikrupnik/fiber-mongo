@@ -53,14 +53,14 @@ jobs:
       - run: |
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --global user.name "bot"
-      - name: Git tag and push
-        run: |
-          git tag -a v0.2.9 -m "third release"
-          git push --tags
+#      - name: Git tag and push
+#        run: |
+#          git tag -a v0.2.9 -m "third release"
+#          git push --tags
 #      - uses: rymndhng/release-on-push-action@v0.25.0
 #        with:
 #          bump_version_scheme: patch
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
