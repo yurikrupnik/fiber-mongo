@@ -4,6 +4,14 @@ on:
   push:
     tags:
       - '*'
+  release:
+    types:
+      - created
+      - edited
+      - prereleased
+      - published
+      - released
+      - deleted
 env:
   DOCKER_BUILDKIT: 1
 jobs:
