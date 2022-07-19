@@ -42,8 +42,11 @@ jobs:
       #          go-version: ${{ matrix.go-version }
 #      - run: go version
 #      - run: GOOS=linux GOARCH=amd64 yarn build
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+      - run: |
+          echo ${{ github }}
+          echo $GITHUB_CONTEXT
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name ${{ github.actor }}
       - name: Git tag and push
         run: |
           git tag -a v${{ github.event.inputs.tag }} -m ${{ github.event.inputs.message }}
