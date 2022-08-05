@@ -53,6 +53,13 @@ jobs:
       - run: |
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --global user.name "bot"
+      - name: 'Automated Version Bump'
+        uses: 'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          default: prerelease
+      - name: echo "$TAG"
 #      - name: Git tag and push
 #        run: |
 #          git tag -a v0.2.9 -m "third release"
