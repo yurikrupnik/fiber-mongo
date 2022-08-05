@@ -38,7 +38,7 @@ builds:
 #        - codesign -project="{{ .ProjectName }}" "{{ .Path }}"
 #archives:
 #  -
-#    name_template: aris
+#    name_template: arisds
 #    builds:
 #      - default
 #    meta: true
