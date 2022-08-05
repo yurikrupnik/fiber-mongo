@@ -30,18 +30,8 @@ jobs:
       - run: go version
       - run: go test ./...
       - run: go build
-#      - run: make release-dry
       - name: Login to DockerHub Registry
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-      #      - id: 'auth'
-      #        uses: 'google-github-actions/auth@v0'
-      #        with:
-      #          credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
-#      - name: Bump version and push tag
-#        id: tag_version
-#        uses: mathieudutour/github-tag-action@v6.0
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
       - run: |
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --global user.name "bot"
@@ -67,7 +57,7 @@ jobs:
       - run: cat package.json
       - run: env
       - name: Docker build
-        run: docker build . yurikrupnik/fiber-mongo:{{ .Tag }}
+        run: docker build . yurikrupnik/fiber-mongo
 #      - name: Run GoReleaser
 #        uses: goreleaser/goreleaser-action@v3
 #        with:
