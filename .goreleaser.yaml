@@ -97,7 +97,7 @@ dockers:
     image_templates:
       - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
 #      - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}-amd64"
-#      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}-amd64"
+      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}"
 #    build_flag_templates:
 #      - "--push"
 #      - "--label=org.opencontainers.image.created={{.Date}}"
