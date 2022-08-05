@@ -53,8 +53,9 @@ jobs:
         uses: 'phips28/gh-action-bump-version@master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          default: patch
+        with:
+          default: prerelease
+          preid: 'prc'
       - run: echo "$TAG"
       - run: cat package.json
       - name: Run GoReleaser
