@@ -29,6 +29,7 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - run: go version
       - run: go test ./...
+      - run: go build
 #      - run: make release-dry
       - name: Login to DockerHub Registry
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
@@ -50,6 +51,11 @@ jobs:
 #          version_file: ./VERSION
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      - name: Check outputs
+        run: echo ${{ steps.vars.outputs.sha_short }}
       - name: 'Automated Version Bump'
         uses: 'phips28/gh-action-bump-version@master'
         env:
@@ -59,16 +65,19 @@ jobs:
           preid: 'prc'
       - run: echo "$TAG"
       - run: cat package.json
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v3
-        with:
-          # either 'goreleaser' (default) or 'goreleaser-pro'
-          distribution: goreleaser
-          #          version: latestd
-          args: release --rm-dist
-        #          args: release --rm-dist
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: env
+      - name: Docker build
+        run: docker build . yurikrupnik/fiber-mongo:{{ .Tag }}
+#      - name: Run GoReleaser
+#        uses: goreleaser/goreleaser-action@v3
+#        with:
+#          # either 'goreleaser' (default) or 'goreleaser-pro'
+#          distribution: goreleaser
+#          #          version: latestd
+#          args: release --rm-dist
+#        #          args: release --rm-dist
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #      - name: Git tag and push
 #        run: |
 #          git tag -a v0.2.9 -m "third release"
