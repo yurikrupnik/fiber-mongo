@@ -59,7 +59,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           default: prerelease
-      - name: echo "$TAG"
+      - run: echo "$TAG"
 #      - name: Git tag and push
 #        run: |
 #          git tag -a v0.2.9 -m "third release"
