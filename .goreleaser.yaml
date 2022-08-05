@@ -94,7 +94,7 @@ dockers:
   -
     image_templates:
       - "yurikrupnik/{{ .ProjectName }}:{{ .Tag }}"
-      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}"
+#      - "yurikrupnik/{{ .ProjectName }}:{{ .ShortCommit }}"
     build_flag_templates:
       - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title={{.ProjectName}}"

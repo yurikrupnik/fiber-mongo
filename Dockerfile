@@ -1,4 +1,4 @@
-FROM golang:1.18-buster AS build
+FROM golang:1.18-alpine AS build
 
 WORKDIR /app
 
@@ -17,11 +17,14 @@ RUN go build -o /app
 #34.7MB
 #FROM gcr.io/distroless/base-debian10
 #24.4MB
-FROM scratch
+#19MB
+#FROM alpine:latest
+#13.8MB
+FROM scratch AS final
 WORKDIR /
 
 COPY --from=build /app /app
-#COPY ./fiber-mongo /fiber-mongo
+#COPY ./fiber-mongo /app
 
 EXPOSE 8080
 
