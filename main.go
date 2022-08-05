@@ -34,7 +34,7 @@ func Getenv(key, fallback string) string {
 func run(op string) error {
 	d, err := db.NewMongoStore()
 	if err != nil {
-		return errors.Wrap(err, "unable to connect to db")
+		return errors.Wrap(err, "unable to connect to db!!")
 	}
 	svc := app.NewUserSvc(d)
 
