@@ -63,7 +63,7 @@ jobs:
         with:
           # either 'goreleaser' (default) or 'goreleaser-pro'
           distribution: goreleaser
-          #          version: latest
+          #          version: latestd
           args: release --rm-dist
         #          args: release --rm-dist
         env:
