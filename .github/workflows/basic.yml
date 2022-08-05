@@ -57,7 +57,9 @@ jobs:
       - run: cat package.json
       - run: env
       - name: Docker build
-        run: docker build . yurikrupnik/fiber-mongo
+        run: docker build . yurikrupnik/fiber-mongo:${{ steps.vars.outputs.sha_short }}
+      - name: Docker images
+        run: docker images
 #      - name: Run GoReleaser
 #        uses: goreleaser/goreleaser-action@v3
 #        with:
