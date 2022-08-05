@@ -9,7 +9,7 @@ RUN go mod download
 COPY . .
 ARG GOOS=linux
 ARG GOARCH=amd64
-RUN go build -o /app
+RUN go build -o /fiber-mongo
 
 ##
 ## Deploy
@@ -23,7 +23,7 @@ RUN go build -o /app
 FROM scratch AS final
 WORKDIR /
 
-COPY --from=build /app /app
+COPY --from=build /fiber-mongo /app
 #COPY ./fiber-mongo /app
 
 EXPOSE 8080
