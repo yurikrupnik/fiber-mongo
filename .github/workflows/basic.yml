@@ -64,7 +64,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          default: prerelease
+          default: patch
       - run: echo "$TAG"
       - run: cat package.json
 #      - name: Git tag and push
