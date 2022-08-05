@@ -66,6 +66,7 @@ jobs:
         with:
           default: prerelease
       - run: echo "$TAG"
+      - run: cat package.json
 #      - name: Git tag and push
 #        run: |
 #          git tag -a v0.2.9 -m "third release"
