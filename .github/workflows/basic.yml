@@ -53,18 +53,18 @@ jobs:
       - run: |
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --global user.name "bot"
-      - name: Bump version
-        uses: remorses/bump-version@js
-        with:
-          version_file: ./VERSION
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#      - name: 'Automated Version Bump'
-#        uses: 'phips28/gh-action-bump-version@master'
+#      - name: Bump version
+#        uses: remorses/bump-version@js
+#        with:
+#          version_file: ./VERSION
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          default: prerelease
+      - name: 'Automated Version Bump'
+        uses: 'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          default: prerelease
       - run: echo "$TAG"
 #      - name: Git tag and push
 #        run: |
