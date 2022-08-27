@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: fiber-mongo
-          image: yurikrupnik/fiber-mongo:v0.1.36
+          image: yurikrupnik/fiber-mongo:cbc0f15
           imagePullPolicy: IfNotPresent
           env:
             - name: MONGO_URI
