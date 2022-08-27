@@ -20,7 +20,8 @@ RUN go build -o /fiber-mongo
 #19MB
 #FROM alpine:latest
 #13.8MB
-FROM scratch AS final
+#FROM scratch AS final
+FROM alpine:latest AS final
 WORKDIR /
 
 COPY --from=build /fiber-mongo /app
