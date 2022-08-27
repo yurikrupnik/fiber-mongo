@@ -74,8 +74,8 @@ jobs:
           image: aevea/kaniko
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          cache: true
-          cache_registry: yurikrupnik/cache
+#          cache: true
+#          cache_registry: yurikrupnik/cache
 #      - name: Docker build
 #        run: docker buildx build . -t yurikrupnik/fiber-mongo:${{ steps.vars.outputs.sha_short }} --push --platform linux/amd64
       - name: Docker images
