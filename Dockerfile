@@ -20,6 +20,7 @@ RUN go build -o /fiber-mongo
 #19MB
 #FROM alpine:latest
 #13.8MB
+# scratch does not work on mongo
 #FROM scratch AS final
 FROM alpine:latest AS final
 WORKDIR /
