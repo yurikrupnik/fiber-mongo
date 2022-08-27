@@ -8,14 +8,14 @@
 # helm_repo('cowboysysop', 'https://cowboysysop.github.io/charts/')
 # helm_resource('mongodb', 'cowboysysop/mongo-express')
 
-local_resource(
-  'build-fiber-mongo',
-  cmd='GOOS=linux GOARCH=amd64 go build -o ./fiber-mongo',
-  deps=['.'],
-  ignore=["fiber-mongo", "dist/"]
-)
+# local_resource(
+#   'build-fiber-mongo',
+#   cmd='GOOS=linux GOARCH=amd64 go build -o ./fiber-mongo',
+#   deps=['.'],
+#   ignore=["fiber-mongo", "dist/"]
+# )
 
-docker_build("yurikrupnik/fiber-mongo", ".", only=["fiber-mongo"])
+docker_build("yurikrupnik/fiber-mongo", ".", ignore=["k8s/", "dist/"])
 
 k8s_yaml(kustomize('k8s/base'))
 

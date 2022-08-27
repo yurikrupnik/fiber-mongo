@@ -7,10 +7,10 @@ spec:
     - http:
         paths:
           - pathType: Prefix
-            path: "/users"
+            path: "/api/users"
             backend:
               service:
                 name: fiber-mongo-service
                 port:
                   number: 8080
-      host: acmo.io
+      # host: acmo.io
