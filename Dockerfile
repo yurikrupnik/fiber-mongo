@@ -18,9 +18,9 @@ RUN go build -o /fiber-mongo
 #FROM gcr.io/distroless/base-debian10
 #24.4MB
 #19MB
-#FROM alpine:latest
+FROM alpine:latest
 #13.8MB
-FROM scratch AS final
+#FROM scratch AS final
 #FROM alpine:latest AS final
 WORKDIR /
 
