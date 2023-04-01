@@ -30,6 +30,6 @@ COPY --from=build /fiber-mongo /app
 
 EXPOSE 8080
 
-#USER nonroot:nonroot
+USER nonroot:nonroot
 
 ENTRYPOINT ["/app"]
