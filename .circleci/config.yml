@@ -2,19 +2,31 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   build:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#docker-machine-macos-windows-executor
     docker:
-      - image: circleci/golang:1.15.8
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
+      - image: cimg/go:1.20.6
     steps:
       - checkout
+      - run: go get .
       - run: go build
+      - run: ls
+  test:
+    docker:
+      - image: cimg/go:1.20.6
+    steps:
+      - checkout
+      - run: go get .
+      - run: go test
+  container:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - setup_remote_docker
+#          docker_layer_caching: true
+      - checkout
+      - run: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+      - run: docker buildx build . -t yurikrupnik/circle-fiber-mongo --push
 #      - restore_cache:
 #          keys:
 #            - go-mod-v4-{{ checksum "go.sum" }}
@@ -40,3 +52,5 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build
+      - test
+      - container
