@@ -33,7 +33,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - checkout
-      - run: docker buildx build . -t yurikrupnik/fiber-mongo
+      - run: docker buildx build . -t yurikrupnik/circle-fiber-mongo --push
 #      - restore_cache:
 #          keys:
 #            - go-mod-v4-{{ checksum "go.sum" }}
