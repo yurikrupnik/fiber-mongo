@@ -14,68 +14,97 @@ on:
 #    branches: [ main ]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
-#    runs-on: self-hosted
-    strategy:
-      matrix:
-        go-version: [ 1.19.x ]
-
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-go@v4
+      - name: Setup Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v4
         with:
-          go-version: ${{ matrix.go-version }}
-      - run: go version
-      - run: go test ./...
-#      - run: go build
-      - name: Login to DockerHub Registry
-        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-      - run: |
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "bot"
-#      - name: Bump version
-#        uses: remorses/bump-version@js
+          go-version: 1.20
+          cache: true
+      - name: Install dependencies
+        run: go get .
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.20
+          cache: true
+      - name: Install dependencies
+        run: go get .
+      - name: Build
+        run: go build
+#  build:
+#
+#    runs-on: ubuntu-latest
+##    runs-on: self-hosted
+#    strategy:
+#      matrix:
+#        go-version: [ 1.19.x ]
+#
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: actions/setup-go@v4
 #        with:
-#          version_file: ./VERSION
+#          go-version: ${{ matrix.go-version }}
+#      - run: go version
+#      - run: go test ./...
+##      - run: go build
+#      - name: Login to DockerHub Registry
+#        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+#      - run: |
+#          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+#          git config --global user.name "bot"
+##      - name: Bump version
+##        uses: remorses/bump-version@js
+##        with:
+##          version_file: ./VERSION
+##        env:
+##          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Set outputs
+#        id: vars
+#        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+#      - name: Check outputs
+#        run: echo ${{ steps.vars.outputs.sha_short }}
+#      - name: 'Automated Version Bump'
+#        uses: 'phips28/gh-action-bump-version@master'
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Set outputs
-        id: vars
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-      - name: Check outputs
-        run: echo ${{ steps.vars.outputs.sha_short }}
-      - name: 'Automated Version Bump'
-        uses: 'phips28/gh-action-bump-version@master'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          default: prerelease
-          preid: 'prc'
-      - run: echo "$TAG"
-      - run: cat package.json
-      - run: env
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Inspect builder
-        run: |
-          echo "Name:      ${{ steps.buildx.outputs.name }}"
-          echo "Endpoint:  ${{ steps.buildx.outputs.endpoint }}"
-          echo "Status:    ${{ steps.buildx.outputs.status }}"
-          echo "Flags:     ${{ steps.buildx.outputs.flags }}"
-          echo "Platforms: ${{ steps.buildx.outputs.platforms }}"
-      - name: Kaniko build
-        uses: aevea/action-kaniko@master
-        with:
-          image: yurikrupnik/fiber-mongo
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          cache: true
-          cache_registry: yurikrupnik/cache
+#        with:
+#          default: prerelease
+#          preid: 'prc'
+#      - run: echo "$TAG"
+#      - run: cat package.json
+#      - run: env
+#      - name: Set up QEMU
+#        uses: docker/setup-qemu-action@v2
+#      - name: Set up Docker Buildx
+#        id: buildx
+#        uses: docker/setup-buildx-action@v2
+#      - name: Inspect builder
+#        run: |
+#          echo "Name:      ${{ steps.buildx.outputs.name }}"
+#          echo "Endpoint:  ${{ steps.buildx.outputs.endpoint }}"
+#          echo "Status:    ${{ steps.buildx.outputs.status }}"
+#          echo "Flags:     ${{ steps.buildx.outputs.flags }}"
+#          echo "Platforms: ${{ steps.buildx.outputs.platforms }}"
+#      - name: Kaniko build
+#        uses: aevea/action-kaniko@master
+#        with:
+#          image: yurikrupnik/fiber-mongo
+#          username: ${{ secrets.DOCKERHUB_USERNAME }}
+#          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+#          cache: true
+#          cache_registry: yurikrupnik/cache
+
+
+
+
 #        ${{ steps.vars.outputs.sha_short }} // or git tag
 #      - name: Docker build
 #        run: docker buildx build . -t yurikrupnik/fiber-mongo:${{ steps.vars.outputs.sha_short }} --platform linux/amd64,linux/arm64 --push
