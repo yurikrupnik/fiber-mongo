@@ -15,6 +15,16 @@ jobs:
     steps:
       - checkout
       - run: go build
+  test:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: cimg/go:1.20.6
+    # Add steps to the job
+    # See: https://circleci.com/docs/configuration-reference/#steps
+    steps:
+      - checkout
+      - run: go test
 #      - restore_cache:
 #          keys:
 #            - go-mod-v4-{{ checksum "go.sum" }}
@@ -40,3 +50,4 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build
+      - test
