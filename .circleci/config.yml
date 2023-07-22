@@ -22,8 +22,6 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#docker-machine-macos-windows-executor
     docker:
       - image: cimg/go:1.20.6
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
       - run: go get .
