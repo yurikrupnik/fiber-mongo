@@ -26,6 +26,14 @@ jobs:
       - checkout
       - run: go get .
       - run: go test
+  container:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout
+      - run: docker buildx build . -t yurikrupnik/fiber-mongo
 #      - restore_cache:
 #          keys:
 #            - go-mod-v4-{{ checksum "go.sum" }}
@@ -52,3 +60,4 @@ workflows:
     jobs:
       - build
       - test
+      - container
