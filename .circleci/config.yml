@@ -33,6 +33,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - checkout
+      - run: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
       - run: docker buildx build . -t yurikrupnik/circle-fiber-mongo --push
 #      - restore_cache:
 #          keys:
