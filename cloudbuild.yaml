@@ -1,0 +1,45 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - '--no-cache'
+      - '-t'
+      - >-
+        $_AR_HOSTNAME/$_PROJECT_ID/$_REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
+      - '-t'
+      - >-
+        $_AR_HOSTNAME/$_PROJECT_ID/$_REPO_NAME/$_SERVICE_NAME:$TAG_NAME
+      - .
+      - '-f'
+      - Dockerfile
+    id: Build
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - >-
+        $_AR_HOSTNAME/$_PROJECT_ID/$_REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
+      - push
+      - >-
+        $_AR_HOSTNAME/$_PROJECT_ID/$_REPO_NAME/$_SERVICE_NAME:$TAG_NAME
+    id: Push
+images:
+  - >-
+    $_AR_HOSTNAME/$_PROJECT_ID/$_REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
+  - >-
+    $_AR_HOSTNAME/$_PROJECT_ID/$_REPO_NAME/$_SERVICE_NAME:$TAG_NAME
+options:
+  substitutionOption: ALLOW_LOOSE
+  logging: CLOUD_LOGGING_ONLY
+substitutions:
+  _TRIGGER_ID: 083ef47d-6622-411d-b340-cc4c6bc89d95
+  _SERVICE_NAME: fiber-mongo
+  _DEPLOY_REGION: us-central1
+  _AR_HOSTNAME: europe-central2-docker.pkg.dev
+  _PROJECT_ID: sdp-demo-388112
+  _REPO_NAME: container-repo
+#projects:
+#  - projectId: sdp-demo-388112
+tags:
+#  - gcp-cloud-build-deploy-cloud-run
+#  - gcp-cloud-build-deploy-cloud-run-managed
+  - fiber-mongo,tags
