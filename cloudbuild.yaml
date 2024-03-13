@@ -42,4 +42,5 @@ substitutions:
 tags:
 #  - gcp-cloud-build-deploy-cloud-run
 #  - gcp-cloud-build-deploy-cloud-run-managed
-  - fiber-mongo tags
+  - fiber-mongo
+  - tags
