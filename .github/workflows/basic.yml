@@ -85,7 +85,7 @@ jobs:
         with:
           context: .
           push: true
-          cache-from: type=registry,ref=europe-central2-docker.pkg.dev/sdp-demo-388112/container-repo/fiber-mongo:latest
-          cache-to: type=inline
+#          cache-from: type=registry,ref=user/app:buildcache
+#          cache-to: type=registry,ref=user/app:buildcache,mode=max
 #          platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
