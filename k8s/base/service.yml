@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: fiber-mongo-service
+  name: fiber-mongo
   labels:
-    run: fiber-mongo-service
+    run: fiber-mongo
 spec:
   type: ClusterIP
   ports:
