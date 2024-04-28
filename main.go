@@ -14,7 +14,7 @@ import (
 
 func main() {
 	args := os.Args
-	op := "servesr"
+	op := "server"
 	if len(args) > 1 {
 		op = args[0]
 	}
