@@ -70,7 +70,7 @@ jobs:
           # list of Docker images to use as base name for tags
           images: |
 #            europe-central2-docker.pkg.dev/sdp-demo-388112/container-repo/fiber-mongo
-#            yurikrupnik/fiber-mongo
+            yurikrupnik/fiber-mongo
 #          # generate Docker tags based on the following events/attributes
 #          tags: |
 #            type=schedule
