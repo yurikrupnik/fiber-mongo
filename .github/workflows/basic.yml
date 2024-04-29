@@ -2,9 +2,9 @@
 # For more infsormation see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Basic golang CI
-env:
-  GOOS: linux
-  GOARCH: amd64
+#env:
+#  GOOS: linux
+#  GOARCH: amd64
 on:
   push:
     branches: [ master ]
