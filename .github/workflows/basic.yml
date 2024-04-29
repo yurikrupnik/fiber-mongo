@@ -78,12 +78,12 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{version}}
             type=sha
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          platforms: linux/amd64,linux/arm64
-          tags: ${{ steps.meta.outputs.tags }}
-          cache-from: type=registry,ref=yurikrupnik/fiber-mongo:buildcache
-          cache-to: type=registry,ref=yurikrupnik/fiber-mongo:buildcache,mode=max
+#      - name: Build and push
+#        uses: docker/build-push-action@v5
+#        with:
+#          context: .
+#          push: true
+#          platforms: linux/amd64,linux/arm64
+#          tags: ${{ steps.meta.outputs.tags }}
+#          cache-from: type=registry,ref=yurikrupnik/fiber-mongo:buildcache
+#          cache-to: type=registry,ref=yurikrupnik/fiber-mongo:buildcache,mode=max
