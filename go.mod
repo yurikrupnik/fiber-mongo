@@ -3,7 +3,7 @@ module fiber-mongo
 go 1.19
 
 require (
-	github.com/go-playground/validator/v10 v10.19.0
+	github.com/go-playground/validator/v10 v10.20.0
 	github.com/gofiber/fiber/v2 v2.52.4
 	github.com/pkg/errors v0.9.1
 	go.mongodb.org/mongo-driver v1.15.0
