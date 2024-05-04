@@ -14,18 +14,18 @@ spec:
     spec:
       containers:
         - name: fiber-mongo
-          resizePolicy:
-            - resourceName: "memory"
-              restartPolicy: "RestartContainer"
-            - resourceName: "cpu"
-              restartPolicy: "NotRequired"
-          resources:
-            limits:
-              cpu: "300m"
-              memory: "1Gi"
-            requests:
-              cpu: "100m"
-              memory: "500Mi"
+#          resizePolicy:
+#            - resourceName: "memory"
+#              restartPolicy: "RestartContainer"
+#            - resourceName: "cpu"
+#              restartPolicy: "NotRequired"
+#          resources:
+#            limits:
+#              cpu: "300m"
+#              memory: "1Gi"
+#            requests:
+#              cpu: "100m"
+#              memory: "500Mi"
           image: yurikrupnik/fiber-mongo:pr-67
 #          imagePullPolicy: IfNotPresent
           imagePullPolicy: Always
