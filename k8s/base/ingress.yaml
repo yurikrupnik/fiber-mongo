@@ -10,7 +10,7 @@ spec:
             path: "/api/users"
             backend:
               service:
-                name: fiber-mongo-service
+                name: fiber-mongo
                 port:
                   number: 8080
       # host: acmo.io
