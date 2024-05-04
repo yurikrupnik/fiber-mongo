@@ -26,8 +26,9 @@ spec:
             requests:
               cpu: "100m"
               memory: "500Mi"
-          image: yurikrupnik/fiber-mongo:master
-          imagePullPolicy: IfNotPresent
+          image: yurikrupnik/fiber-mongo:pr-67
+#          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           env:
             - name: MONGO_URI
               value: mongodb+srv://yurikrupnik:T4eXKj1RBI4VnszC@cluster0.rdmew.mongodb.net/
