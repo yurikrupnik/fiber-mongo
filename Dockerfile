@@ -7,8 +7,8 @@ COPY go.sum ./
 RUN go mod download
 
 COPY . .
-ARG GOOS=linux
-ARG GOARCH=amd64
+#ARG GOOS=linux
+#ARG GOARCH=amd64
 RUN go build -o /fiber-mongo
 
 ##
