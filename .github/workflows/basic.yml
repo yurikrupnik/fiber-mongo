@@ -52,7 +52,7 @@ jobs:
 #          credentials_json: "${{ secrets.GCP_CREDENTIALS }}" # The GCP credentials JSON SERVICE_ACCOUNT_KEY
 #      - name: "Set up Cloud SDK"
 #        uses: "google-github-actions/setup-gcloud@v2"
-#      - name: "Use gcloud CLI"
+#      - name: "Use gcloud CLI1"
 #        run: "gcloud info"
 #      - run: |-
 #          gcloud --quiet auth configure-docker europe-central2-docker.pkg.dev
