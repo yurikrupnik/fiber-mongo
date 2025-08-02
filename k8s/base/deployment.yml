@@ -14,20 +14,21 @@ spec:
     spec:
       containers:
         - name: fiber-mongo
-          resizePolicy:
-            - resourceName: "memory"
-              restartPolicy: "RestartContainer"
-            - resourceName: "cpu"
-              restartPolicy: "NotRequired"
+#          resizePolicy:
+#            - resourceName: "memory"
+#              restartPolicy: "RestartContainer"
+#            - resourceName: "cpu"
+#              restartPolicy: "NotRequired"
           resources:
             limits:
               cpu: "300m"
-              memory: "1Gi"
+              memory: "500Mi"
             requests:
               cpu: "100m"
-              memory: "500Mi"
-          image: yurikrupnik/fiber-mongo:master
-          imagePullPolicy: IfNotPresent
+              memory: "250Mi"
+          image: yurikrupnik/fiber-mongo:pr-68
+#          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           env:
             - name: MONGO_URI
               value: mongodb+srv://yurikrupnik:T4eXKj1RBI4VnszC@cluster0.rdmew.mongodb.net/
